@@ -10,6 +10,7 @@ gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.5'
 gem 'devise'
 gem 'devise-jwt', '~> 0.5.6'
+gem 'jsonapi-resources'
 
 group :development, :test do
   gem 'dotenv-rails'
