@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include JSONAPI::ActsAsResourceController
+
   def render_resource_with_token(resource)
     if resource.errors.empty?
       token = JwtService.encode(payload: resource.to_json)

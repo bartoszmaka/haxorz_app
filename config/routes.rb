@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   root to: 'home#index'
   resources :home, only: %i[index]
 
-  jsonapi_resoures :items
-  jsonapi_resoures :agendas
-  # resources :items, only: %i[index]
-  # resources :agendas, only: %i[index]
+  jsonapi_resources :items
+  jsonapi_resources :agendas
 end
