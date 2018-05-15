@@ -1,6 +1,18 @@
 class SessionsController < Devise::SessionsController
   respond_to :json
 
+  def create
+    resource = User.find_for_database_authentication(:email=>params[:email])
+    return invalid_login_attempt unless resource
+
+    if resource.valid_password?(params[:password])
+      sign_in('user', resource)
+      render_resource_with_token(resource)
+      return 
+    end
+    validation_error(resource)
+  end
+
   private
 
   def respond_with(resource, _opts = {})

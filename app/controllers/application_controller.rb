@@ -1,5 +1,18 @@
 class ApplicationController < ActionController::API
-  before_action :authenticate_user!
+  def render_resource_with_token(resource)
+    if resource.errors.empty?
+      token = JwtService.encode(payload: resource.to_json)
+      render json: {
+        id: resource.id,
+        email: resource.email,
+        first_name: resource.firstname,
+        last_name: resource.lastname,
+        token: token,
+      }
+    else
+      validation_error(resource)
+    end
+  end
 
   def render_resource(resource)
     if resource.errors.empty?
@@ -13,12 +26,12 @@ class ApplicationController < ActionController::API
     render json: {
       errors: [
         {
-          status: '400',
-          title: 'Bad Request',
+          status: '403',
+          title: 'forbidden',
           detail: resource.errors,
           code: '100'
         }
       ]
-    }, status: :bad_request
+    }, status: :forbidden
   end
 end

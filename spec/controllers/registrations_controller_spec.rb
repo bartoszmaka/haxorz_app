@@ -19,7 +19,7 @@ RSpec.describe 'POST /signup', type: :request do
     end
 
     it 'returns a new user' do
-      expect(response.body).to match_schema('user')
+      expect(JSON.parse(response.body)).to include(id: user.id, email: user.email)
     end
   end
 
