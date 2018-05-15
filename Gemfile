@@ -11,6 +11,7 @@ gem 'rails', '~> 5.1.5'
 gem 'devise'
 gem 'devise-jwt', '~> 0.5.6'
 gem 'jsonapi-resources'
+gem 'rack-cors', require: 'rack/cors'
 
 group :development, :test do
   gem 'dotenv-rails'

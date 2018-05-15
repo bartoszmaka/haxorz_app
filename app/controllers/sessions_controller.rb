@@ -3,7 +3,8 @@ class SessionsController < Devise::SessionsController
 
   def create
     resource = User.find_for_database_authentication(:email=>params[:email])
-    return invalid_login_attempt unless resource
+    # return invalid_login_attempt unless resource
+    return render json: { errors: { email: 'not found' } }, status: 422 unless resource
 
     if resource.valid_password?(params[:password])
       sign_in('user', resource)

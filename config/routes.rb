@@ -16,4 +16,5 @@ Rails.application.routes.draw do
 
   jsonapi_resources :items
   jsonapi_resources :agendas
+  jsonapi_resources :questions
 end
